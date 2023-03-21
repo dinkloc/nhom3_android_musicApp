@@ -24,7 +24,7 @@ public class PlayNhacAdapter extends RecyclerView.Adapter<PlayNhacAdapter.ViewHo
         this.context = context;
         this.mangbaihat = mangbaihat;
     }
-    
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
