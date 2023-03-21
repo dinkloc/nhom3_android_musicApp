@@ -78,7 +78,7 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
                 }
                 else{
                     holder.imgThich.setImageResource(R.drawable.loved);
-                    Call<String> str = db.UpdateBaiHatYT("username",baihat.getIdBaiHat(),"add");
+                    Call<String> str = db.UpdateBaiHatYT("username",currentbh,"add");
                     str.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
