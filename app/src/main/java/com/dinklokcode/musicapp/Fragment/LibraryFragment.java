@@ -64,11 +64,13 @@ public class LibraryFragment extends Fragment {
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 ArrayList<BaiHat> mangbh = (ArrayList<BaiHat>) response.body();
                 Log.d("BBB",mangbh.get(0).getTenBaiHat());
-                baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh);
-                LinearLayoutManager ln = new LinearLayoutManager(getActivity());
-                ln.setOrientation(LinearLayoutManager.VERTICAL);
-                DsNhacYeuThich.setLayoutManager(ln);
-                DsNhacYeuThich.setAdapter(baiHatAdapter);
+                if(mangbh.size()>0){
+                    baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh);
+                    LinearLayoutManager ln = new LinearLayoutManager(getActivity());
+                    ln.setOrientation(LinearLayoutManager.VERTICAL);
+                    DsNhacYeuThich.setLayoutManager(ln);
+                    DsNhacYeuThich.setAdapter(baiHatAdapter);
+                }
             }
 
             @Override
@@ -85,11 +87,13 @@ public class LibraryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<PlaylistModel>> call, Response<List<PlaylistModel>> response) {
                 ArrayList<PlaylistModel> mangplaylist = (ArrayList<PlaylistModel>) response.body();
-                PlaylistAdapter = new PlaylistAdapter(getActivity(), mangplaylist);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                PlaylistCaNhan.setLayoutManager(linearLayoutManager);
-                PlaylistCaNhan.setAdapter(PlaylistAdapter);
+                if(mangplaylist.size()>0){
+                    PlaylistAdapter = new PlaylistAdapter(getActivity(), mangplaylist);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                    linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                    PlaylistCaNhan.setLayoutManager(linearLayoutManager);
+                    PlaylistCaNhan.setAdapter(PlaylistAdapter);
+                }
             }
 
             @Override

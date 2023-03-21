@@ -1,6 +1,7 @@
 package com.dinklokcode.musicapp.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +31,16 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
     Context context;
     ArrayList<BaiHat> baiHatArraylist;
     String currentbh = "";
-//    String username = ""
+    String username = "";
     public BaiHatAdapter(Context context, ArrayList<BaiHat> baiHatArraylist) {
         this.context = context;
         this.baiHatArraylist = baiHatArraylist;
-//        username = context.getString()
+    }
+
+    public BaiHatAdapter(Context context, ArrayList<BaiHat> baiHatArraylist, String username) {
+        this.context = context;
+        this.baiHatArraylist = baiHatArraylist;
+        this.username = username;
     }
 
     @NonNull
@@ -58,11 +64,12 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
                 if(currentbh != baihat.getIdBaiHat()){
                     currentbh = baihat.getIdBaiHat();
                     holder.imgThich.setImageResource(R.drawable.love);
-                    Call<String> str = db.UpdateBaiHatYT("username",baihat.getIdBaiHat(),"delete");
+                    Call<String> str = db.UpdateBaiHatYT("username",baihat.getIdBaiHat());
                     str.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             if(response.body()=="OK"){
+                                baiHatArraylist.remove(baihat);
                                 Toast.makeText(context,"Bỏ thích",Toast.LENGTH_SHORT);
                             }
                             else{
@@ -78,11 +85,13 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
                 }
                 else{
                     holder.imgThich.setImageResource(R.drawable.loved);
-                    Call<String> str = db.UpdateBaiHatYT("username",currentbh,"add");
+                    Log.d("BBB",baihat.getTenBaiHat());
+                    Call<String> str = db.UpdateBaiHatYT("username",baihat.getIdBaiHat());
                     str.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             if(response.body()=="OK"){
+                                baiHatArraylist.add(baihat);
                                 Toast.makeText(context,"Thích",Toast.LENGTH_SHORT);
                             }
                             else{

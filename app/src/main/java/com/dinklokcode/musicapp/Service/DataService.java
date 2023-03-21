@@ -57,5 +57,5 @@ public interface DataService {
 
     @FormUrlEncoded
     @POST("updatebhyt.php")
-    Call<String> UpdateBaiHatYT(@Field("username") String username,@Field("idbaihat") String idBaiHat,@Field("update") String update);
+    Call<String> UpdateBaiHatYT(@Field("username") String username,@Field("idbaihat") String idBaiHat);
 }
