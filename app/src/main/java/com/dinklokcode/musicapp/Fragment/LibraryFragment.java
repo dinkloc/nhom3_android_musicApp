@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.ArrayRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ComponentActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +56,6 @@ public class LibraryFragment extends Fragment {
         GetDataPlaylist();
         return view;
     }
-
     private void GetDataDSBaihat() {
         DataService db = APIService.getService();
         Call<List<BaiHat>> callback = db.GetDSBaiHatYTCaNhan("username");
@@ -63,6 +63,7 @@ public class LibraryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 ArrayList<BaiHat> mangbh = (ArrayList<BaiHat>) response.body();
+                Log.d("BBB",mangbh.get(0).getTenBaiHat());
                 baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh);
                 LinearLayoutManager ln = new LinearLayoutManager(getActivity());
                 ln.setOrientation(LinearLayoutManager.VERTICAL);

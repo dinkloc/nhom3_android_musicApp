@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,10 +29,12 @@ import retrofit2.Response;
 public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder>{
     Context context;
     ArrayList<BaiHat> baiHatArraylist;
-
+    String currentbh = "";
+//    String username = ""
     public BaiHatAdapter(Context context, ArrayList<BaiHat> baiHatArraylist) {
         this.context = context;
         this.baiHatArraylist = baiHatArraylist;
+//        username = context.getString()
     }
 
     @NonNull
@@ -51,20 +54,49 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
         holder.imgThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.imgThich.setImageResource(R.drawable.love);
                 DataService db = APIService.getService();
-                Call<List<BaiHat>> callback = db.GetDSBaiHatYTCaNhan("username123");
-                callback.enqueue(new Callback<List<BaiHat>>() {
-                    @Override
-                    public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+                if(currentbh != baihat.getIdBaiHat()){
+                    currentbh = baihat.getIdBaiHat();
+                    holder.imgThich.setImageResource(R.drawable.love);
+                    Call<String> str = db.UpdateBaiHatYT("username",baihat.getIdBaiHat(),"delete");
+                    str.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if(response.body()=="OK"){
+                                Toast.makeText(context,"Bỏ thích",Toast.LENGTH_SHORT);
+                            }
+                            else{
+                                Toast.makeText(context,"Lỗi",Toast.LENGTH_SHORT);
+                            }
+                        }
 
-                    }
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
 
-                    @Override
-                    public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+                        }
+                    });
+                }
+                else{
+                    holder.imgThich.setImageResource(R.drawable.loved);
+                    Call<String> str = db.UpdateBaiHatYT("username",baihat.getIdBaiHat(),"add");
+                    str.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if(response.body()=="OK"){
+                                Toast.makeText(context,"Thích",Toast.LENGTH_SHORT);
+                            }
+                            else{
+                                Toast.makeText(context,"Lỗi",Toast.LENGTH_SHORT);
+                            }
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+                    currentbh = "";
+                }
             }
         });
     }
