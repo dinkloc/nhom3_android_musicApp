@@ -37,6 +37,9 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
         this.baiHatArraylist = baiHatArraylist;
     }
 
+    public int size(){
+        return baiHatArraylist.size();
+    }
     public BaiHatAdapter(Context context, ArrayList<BaiHat> baiHatArraylist, String username) {
         this.context = context;
         this.baiHatArraylist = baiHatArraylist;
@@ -69,7 +72,6 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             if(response.body()=="OK"){
-                                baiHatArraylist.remove(baihat);
                                 Toast.makeText(context,"Bỏ thích",Toast.LENGTH_SHORT);
                             }
                             else{

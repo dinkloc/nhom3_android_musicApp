@@ -29,6 +29,9 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
         this.mangplaylist = mangplaylist;
     }
 
+    public int sỉze(){
+        return mangplaylist.size();
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
