@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.dinklokcode.musicapp.Adapter.ViewPagerAdapter;
 import com.dinklokcode.musicapp.Fragment.HomeFragment;

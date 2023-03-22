@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dinklokcode.musicapp.Activity.LibPListActivity;
+import com.dinklokcode.musicapp.Activity.MainActivity;
 import com.dinklokcode.musicapp.Adapter.BaiHatAdapter;
 import com.dinklokcode.musicapp.Adapter.PlaylistAdapter;
 import com.dinklokcode.musicapp.Model.BaiHat;
@@ -51,9 +53,17 @@ public class LibraryFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_library,container,false);
         txtCanhan = view.findViewById(R.id.txtcanhan);
         PlaylistCaNhan = view.findViewById(R.id.playlistcanhan);
+        txtTaoPlaylist = view.findViewById(R.id.taoplaylist);
         DsNhacYeuThich = view.findViewById(R.id.dsbaihatdathich);
         GetDataDSBaihat();
         GetDataPlaylist();
+        txtTaoPlaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent t = new Intent(getActivity(),LibPListActivity.class);
+                startActivity(t);
+            }
+        });
         return view;
     }
     private void GetDataDSBaihat() {
