@@ -15,6 +15,15 @@
         android:theme="@style/Theme.MusicApp"
         tools:targetApi="31">
         <activity
+<<<<<<< Updated upstream
+=======
+            android:name=".Activity.InsertBH_playlistActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity.LibPListActivity"
             android:exported="false">
             <meta-data
@@ -22,6 +31,7 @@
                 android:value="" />
         </activity>
         <activity
+>>>>>>> Stashed changes
             android:name=".Activity.DanhSachBaiHat_Activity"
             android:exported="false">
             <meta-data
@@ -41,6 +51,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
     </application>
 
 </manifest>
