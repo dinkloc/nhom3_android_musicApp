@@ -83,24 +83,24 @@ public class LibPListActivity extends AppCompatActivity {
                     Toast.makeText(LibPListActivity.this, "Độ dài tên playlist từ 1 -> 36 ký tự", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    DataService db = APIService.getService();
-                    Call<String> callb = db.InsertPlayList("username",tenplaylist);
-                    callb.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            if(response.body()=="OK"){
-                                Toast.makeText(LibPListActivity.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                Toast.makeText(LibPListActivity.this,"Thêm thất bại",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-
-                        }
-                    });
+//                    DataService db = APIService.getService();
+//                    Call<String> callb = db.InsertPlayList("username",tenplaylist);
+//                    callb.enqueue(new Callback<String>() {
+//                        @Override
+//                        public void onResponse(Call<String> call, Response<String> response) {
+//                            if(response.body()=="OK"){
+//                                Toast.makeText(LibPListActivity.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
+//                            }
+//                            else{
+//                                Toast.makeText(LibPListActivity.this,"Thêm thất bại",Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<String> call, Throwable t) {
+//
+//                        }
+//                    });
                 }
             }
         });
