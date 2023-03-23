@@ -5,19 +5,19 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginEnd="10dp"
-    android:layout_marginStart="10dp">
+    android:layout_marginStart="25dp"
+    android:layout_marginTop="10dp">
 
     <LinearLayout
         android:id="@+id/linearcarviewplaylist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageviewplaylist"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:layout_gravity="center"
             android:scaleType="fitXY"
             android:src="@drawable/imgitem" />
@@ -26,12 +26,15 @@
             android:id="@+id/textviewplaylist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/arimo_bold"
             android:maxLines="2"
             android:text="textview"
-            android:textColor="#B6B6B6"
-            android:textSize="20sp" />
+            android:background="#151515"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
 
     </LinearLayout>
 

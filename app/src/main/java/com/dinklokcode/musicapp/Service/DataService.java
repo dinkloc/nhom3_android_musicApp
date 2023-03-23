@@ -62,4 +62,8 @@ public interface DataService {
     @FormUrlEncoded
     @POST("updateplaylist.php")
     Call<String> InsertPlayList(@Field("username") String username,@Field("nameplaylist") String nameplaylist);
+
+    @FormUrlEncoded
+    @POST("test.php")
+    Call<List<PlaylistModel>> TestInsertPlayList(@Field("username") String username,@Field("nameplaylist") String nameplaylist);
 }

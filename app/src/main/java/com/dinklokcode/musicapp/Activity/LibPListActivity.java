@@ -3,10 +3,12 @@ package com.dinklokcode.musicapp.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,12 +36,37 @@ public class LibPListActivity extends AppCompatActivity {
     ImageView imgAdd;
     EditText playlistname;
     PlaylistAdapter PlaylistAdapter;
+    ArrayList<PlaylistModel> mangplaylist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lib_plist);
         anhxa();
         init();
+        getData();
+    }
+
+    private void getData() {
+        DataService db = new APIService().getService();
+        Call<List<PlaylistModel>> callback = db.GetDSPlayListCaNhan("username");
+        callback.enqueue(new Callback<List<PlaylistModel>>() {
+            @Override
+            public void onResponse(Call<List<PlaylistModel>> call, Response<List<PlaylistModel>> response) {
+                mangplaylist = (ArrayList<PlaylistModel>) response.body();
+                if(mangplaylist.size()>0){
+                    PlaylistAdapter = new PlaylistAdapter(LibPListActivity.this, mangplaylist);
+                    DSallPlaylist.setLayoutManager(new GridLayoutManager(LibPListActivity.this,2));
+                    if(PlaylistAdapter.sỉze()>0){
+                        DSallPlaylist.setAdapter(PlaylistAdapter);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PlaylistModel>> call, Throwable t) {
+
+            }
+        });
     }
 
     public void  init(){
@@ -53,28 +80,7 @@ public class LibPListActivity extends AppCompatActivity {
                 finish();
             }
         });
-        DataService db = new APIService().getService();
-        Call<List<PlaylistModel>> callback = db.GetDSPlayListCaNhan("username");
-        callback.enqueue(new Callback<List<PlaylistModel>>() {
-            @Override
-            public void onResponse(Call<List<PlaylistModel>> call, Response<List<PlaylistModel>> response) {
-                ArrayList<PlaylistModel> mangplaylist = (ArrayList<PlaylistModel>) response.body();
-                if(mangplaylist.size()>0){
-                    PlaylistAdapter = new PlaylistAdapter(LibPListActivity.this, mangplaylist);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(LibPListActivity.this);
-                    linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                    DSallPlaylist.setLayoutManager(linearLayoutManager);
-                    if(PlaylistAdapter.sỉze()>0){
-                        DSallPlaylist.setAdapter(PlaylistAdapter);
-                    }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<List<PlaylistModel>> call, Throwable t) {
-
-            }
-        });
         imgAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,24 +89,26 @@ public class LibPListActivity extends AppCompatActivity {
                     Toast.makeText(LibPListActivity.this, "Độ dài tên playlist từ 1 -> 36 ký tự", Toast.LENGTH_SHORT).show();
                 }
                 else {
-//                    DataService db = APIService.getService();
-//                    Call<String> callb = db.InsertPlayList("username",tenplaylist);
-//                    callb.enqueue(new Callback<String>() {
-//                        @Override
-//                        public void onResponse(Call<String> call, Response<String> response) {
-//                            if(response.body()=="OK"){
-//                                Toast.makeText(LibPListActivity.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
-//                            }
-//                            else{
-//                                Toast.makeText(LibPListActivity.this,"Thêm thất bại",Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<String> call, Throwable t) {
-//
-//                        }
-//                    });
+                    DataService db = APIService.getService();
+                    Call<String> cback = db.InsertPlayList("username",tenplaylist.toString());
+                    cback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if((response.body().equals("OK"))){
+                                getData();
+                                Toast.makeText(LibPListActivity.this,"Thêm thành công",Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(LibPListActivity.this,"Thêm lỗi",Toast.LENGTH_SHORT).show();
+                                Log.d("CCC",response.body().toString());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
                 }
             }
         });

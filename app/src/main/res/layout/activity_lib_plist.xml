@@ -20,17 +20,19 @@
             android:background="@drawable/addplaylist"
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/custom_bgplaylist"></View>
+                android:background="@drawable/custom_bgplaylist" />
+
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:elevation="6dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 android:id="@+id/toolbardsplist"
-                android:layout_height="60dp"></androidx.appcompat.widget.Toolbar>
+                android:layout_height="60dp" />
 
             <EditText
                 android:paddingLeft="10dp"
@@ -43,7 +45,7 @@
                 android:layout_marginBottom="7dp"
                 android:background="#9FFFFDFD"
                 android:maxLines="1"
-                android:textColor="#0749ED"></EditText>
+                android:textColor="#0749ED" />
 
             <ImageView
                 android:id="@+id/imgAdd"
@@ -52,7 +54,7 @@
                 android:layout_gravity="bottom|right"
                 android:src="@drawable/add"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="13dp"></ImageView>
+                android:layout_marginBottom="13dp" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
