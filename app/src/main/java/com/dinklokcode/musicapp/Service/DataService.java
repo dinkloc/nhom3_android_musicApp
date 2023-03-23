@@ -57,13 +57,9 @@ public interface DataService {
 
     @FormUrlEncoded
     @POST("updatebhyt.php")
-<<<<<<< Updated upstream
-    Call<String> UpdateBaiHatYT(@Field("username") String username,@Field("idbaihat") String idBaiHat,@Field("update") String update);
-=======
     Call<String> UpdateBaiHatYT(@Field("username") String username,@Field("idbaihat") String idBaiHat);
 
     @FormUrlEncoded
     @POST("updateplaylist.php")
     Call<String> InsertPlayList(@Field("username") String username,@Field("nameplaylist") String nameplaylist);
->>>>>>> Stashed changes
 }
