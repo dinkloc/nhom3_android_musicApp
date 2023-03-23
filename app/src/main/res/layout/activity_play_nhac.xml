@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/custom_background"
+    android:background="@drawable/custom_backgroud"
     tools:context=".Activity.PlayNhacActivity">
 
 
@@ -86,7 +86,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"/>
             <ImageButton
-                android:src="@drawable/iconplay"
+                android:src="@drawable/nutplay"
                 android:scaleType="fitXY"
                 android:background="@null"
                 android:id="@+id/imagebuttonplay"

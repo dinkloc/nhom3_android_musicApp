@@ -69,11 +69,12 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
         if (quangcao != null && !quangcao.getTenBaiHat().equals("")) {
             setValueInView(quangcao.getTenBaiHat(), quangcao.getHinhBaiHat());
             getDataQuangCao(quangcao.getIdQuangCao());
-
+            eventClick();
         }
         if (playlistModel != null && !playlistModel.getTen().equals("")) {
             setValueInView(playlistModel.getTen(), playlistModel.getHinhPlaylist());
             getDataPlayList(playlistModel.getIdPlaylist());
+            eventClick();
         }
     }
 
@@ -141,7 +142,7 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
         txtcollapsing = findViewById(R.id.textViewcollapsing);
         btnThemnhac = findViewById(R.id.btnthemnhacthuvien);
         collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
-
+        floatingActionButton.setEnabled(false);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitleTextColor(Color.WHITE);
@@ -163,5 +164,16 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
                 playlistModel = (PlaylistModel) intent.getSerializableExtra("itemplaylist");
             }
         }
+    }
+    private void eventClick() {
+        floatingActionButton.setEnabled(true);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DanhSachBaiHat_Activity.this, PlayNhacActivity.class);
+                intent.putExtra("cacbaihat", mangBaiHat);
+                startActivity(intent);
+            }
+        });
     }
 }

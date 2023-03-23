@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dinklokcode.musicapp.Activity.PlayNhacActivity;
 import com.dinklokcode.musicapp.Model.BaiHatModel;
 import com.dinklokcode.musicapp.R;
 import com.squareup.picasso.Picasso;
@@ -58,7 +59,14 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
             hinhbaihat = itemView.findViewById(R.id.imageViewhinhbaihat);
             tim = itemView.findViewById(R.id.imageViewtimdanhsachbaihat);
 
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, PlayNhacActivity.class);
+                    intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
