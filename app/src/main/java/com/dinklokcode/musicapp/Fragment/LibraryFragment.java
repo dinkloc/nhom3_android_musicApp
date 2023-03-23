@@ -62,15 +62,15 @@ public class LibraryFragment extends Fragment {
         callback.enqueue(new Callback<List<BaiHat>>() {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
-                ArrayList<BaiHat> mangbh = (ArrayList<BaiHat>) response.body();
-                Log.d("BBB",mangbh.get(0).getTenBaiHat());
-                if(mangbh.size()>0){
-                    baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh);
-                    LinearLayoutManager ln = new LinearLayoutManager(getActivity());
-                    ln.setOrientation(LinearLayoutManager.VERTICAL);
-                    DsNhacYeuThich.setLayoutManager(ln);
-                    DsNhacYeuThich.setAdapter(baiHatAdapter);
-                }
+//                ArrayList<BaiHat> mangbh = (ArrayList<BaiHat>) response.body();
+//                Log.d("BBB",mangbh.get(0).getTenBaiHat());
+//                if(mangbh.size()>0){
+//                    baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh);
+//                    LinearLayoutManager ln = new LinearLayoutManager(getActivity());
+//                    ln.setOrientation(LinearLayoutManager.VERTICAL);
+//                    DsNhacYeuThich.setLayoutManager(ln);
+//                    DsNhacYeuThich.setAdapter(baiHatAdapter);
+//                }
             }
 
             @Override

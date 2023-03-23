@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MusicApp"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.PlayNhacActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.DanhSachBaiHat_Activity"
             android:exported="false">
             <meta-data
@@ -34,7 +37,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
     </application>
 
 </manifest>
