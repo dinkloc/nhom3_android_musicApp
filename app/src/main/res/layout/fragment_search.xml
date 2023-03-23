@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.HomeFragment"
-    android:background="@android:color/holo_blue_dark">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    tools:context=".Fragment.HomeFragment">
+    <com.google.android.material.appbar.AppBarLayout
+        android:background="#3e3ee2"
+        android:id="@+id/appbarlayoutsearchbaihat"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Search Fragment"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_margin="20dp"/>
-
-</FrameLayout>
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarsearchbaihat"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"></androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/appbarlayoutsearchbaihat"
+        android:id="@+id/recyclerviewsearchbaihat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:visibility="gone"
+        android:textColor="#CC7467"
+        android:gravity="center"
+        android:text="    Không có dữ liệu bài hát"
+        android:id="@+id/textviewkhongcodulieu"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </TextView>
+</RelativeLayout>
