@@ -1,6 +1,7 @@
 package com.dinklokcode.musicapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dinklokcode.musicapp.Activity.PlayNhacActivity;
 import com.dinklokcode.musicapp.Model.BaiHatModel;
 import com.dinklokcode.musicapp.R;
 
@@ -52,6 +54,7 @@ public class PlaynhacAdapter extends RecyclerView.Adapter<PlaynhacAdapter.ViewHo
             txtCaSi = itemView.findViewById(R.id.textviewplaynhactencasi);
             txtIndex = itemView.findViewById(R.id.textviewplaynhacindex);
             txtTenBaiHat = itemView.findViewById(R.id.textviewplaynhactenbaihat);
+
         }
     }
 }
