@@ -65,12 +65,26 @@ public class LibraryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 ArrayList<BaiHat> mangbh = (ArrayList<BaiHat>) response.body();
+<<<<<<< Updated upstream
                 Log.d("BBB",mangbh.get(0).getTenBaiHat());
                 baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh);
                 LinearLayoutManager ln = new LinearLayoutManager(getActivity());
                 ln.setOrientation(LinearLayoutManager.VERTICAL);
                 DsNhacYeuThich.setLayoutManager(ln);
                 DsNhacYeuThich.setAdapter(baiHatAdapter);
+=======
+                Log.d("BBB", String.valueOf(mangbh.size()));
+                if(mangbh.size()>0){
+                    baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh,"username","username");
+                    LinearLayoutManager ln = new LinearLayoutManager(getActivity());
+                    ln.setOrientation(LinearLayoutManager.VERTICAL);
+                    DsNhacYeuThich.setLayoutManager(ln);
+                    Log.d("CCC", String.valueOf(baiHatAdapter.size()));
+                    if(baiHatAdapter.size()>0){
+                        DsNhacYeuThich.setAdapter(baiHatAdapter);
+                    }
+                }
+>>>>>>> Stashed changes
             }
 
             @Override

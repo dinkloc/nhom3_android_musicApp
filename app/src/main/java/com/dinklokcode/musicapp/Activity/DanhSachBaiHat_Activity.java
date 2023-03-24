@@ -71,6 +71,22 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
         if (playlistModel != null && !playlistModel.getTen().equals("")) {
             setValueInView(playlistModel.getTen(), playlistModel.getHinhPlaylist());
             getDataPlayList(playlistModel.getIdPlaylist());
+<<<<<<< Updated upstream
+=======
+            eventClick();
+            btnThemnhac.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DanhSachBaiHat_Activity.this,InsertBH_playlistActivity.class);
+                    String idplaylist = playlistModel.getIdPlaylist();
+                    Bundle d = new Bundle();
+                    d.putString("id",idplaylist);
+                    intent.putExtra("playlist", d);
+                    startActivity(intent);
+                    getDataPlayList(playlistModel.getIdPlaylist());
+                }
+            });
+>>>>>>> Stashed changes
         }
     }
 

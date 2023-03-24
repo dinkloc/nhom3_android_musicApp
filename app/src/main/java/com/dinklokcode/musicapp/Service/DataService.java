@@ -36,7 +36,7 @@ public interface DataService {
     @GET("radiocurrent.php")
     Call<List<RadioModel>> GetRadioCurrent();
 
-    @GET("test.php")
+    @GET("allbaihat.php")
     Call<List<BaiHat>> GetAllBaihat();
 
     @FormUrlEncoded
@@ -65,5 +65,20 @@ public interface DataService {
     @FormUrlEncoded
     @POST("updateplaylist.php")
     Call<String> InsertPlayList(@Field("username") String username,@Field("nameplaylist") String nameplaylist);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+
+    @FormUrlEncoded
+    @POST("test.php")
+    Call<List<PlaylistModel>> TestInsertPlayList(@Field("username") String username,@Field("nameplaylist") String nameplaylist);
+
+    @FormUrlEncoded
+    @POST("searchbaihat.php")
+    Call<List<BaiHat>> GetSearchBaiHat(@Field("tukhoa") String tukhoa);
+
+    @FormUrlEncoded
+    @POST("addbh_plist.php")
+    Call<String> AddBaihatvaoPlaylist(@Field("idPlaylist") String idPlaylist,@Field("idBaihat") String idBaihat);
 >>>>>>> Stashed changes
 }

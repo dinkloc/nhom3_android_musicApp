@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.InsertBH_playlistActivity">
+    tools:context=".Activity.InsertBH_playlistActivity"
+    android:background="@drawable/background_addbh">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@drawable/custom_bgplaylist"/>
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/previous"
+        android:id="@+id/back" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginLeft="45dp"
+        android:id="@+id/txtSearch"
+        android:hint="Tìm kiếm bài hát ..."
+        android:textSize="23sp"
+        android:paddingLeft="10dp"
+        android:letterSpacing="0.04" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search"
+        android:textSize="23sp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/notfound"></TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/lstBaihat"/>
+
+</RelativeLayout>
