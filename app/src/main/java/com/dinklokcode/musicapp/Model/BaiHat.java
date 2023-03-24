@@ -1,9 +1,14 @@
 package com.dinklokcode.musicapp.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BaiHat {
+public class BaiHat implements Parcelable {
 
 @SerializedName("idBaiHat")
 @Expose
@@ -39,7 +44,33 @@ private String idRadio;
 @Expose
 private String idThinhHanh;
 
-public String getIdBaiHat() {
+    protected BaiHat(Parcel in) {
+        idBaiHat = in.readString();
+        idAlbum = in.readString();
+        idPlayList = in.readString();
+        idTheLoai = in.readString();
+        tenBaiHat = in.readString();
+        caSi = in.readString();
+        hinhBaiHat = in.readString();
+        linkBaiHat = in.readString();
+        idNgheSi = in.readString();
+        idRadio = in.readString();
+        idThinhHanh = in.readString();
+    }
+
+    public static final Creator<BaiHat> CREATOR = new Creator<BaiHat>() {
+        @Override
+        public BaiHat createFromParcel(Parcel in) {
+            return new BaiHat(in);
+        }
+
+        @Override
+        public BaiHat[] newArray(int size) {
+            return new BaiHat[size];
+        }
+    };
+
+    public String getIdBaiHat() {
 return idBaiHat;
 }
 
@@ -127,4 +158,23 @@ public void setIdThinhHanh(String idThinhHanh) {
 this.idThinhHanh = idThinhHanh;
 }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(idBaiHat);
+        dest.writeString(idAlbum);
+        dest.writeString(idPlayList);
+        dest.writeString(idTheLoai);
+        dest.writeString(tenBaiHat);
+        dest.writeString(caSi);
+        dest.writeString(hinhBaiHat);
+        dest.writeString(linkBaiHat);
+        dest.writeString(idNgheSi);
+        dest.writeString(idRadio);
+        dest.writeString(idThinhHanh);
+    }
 }

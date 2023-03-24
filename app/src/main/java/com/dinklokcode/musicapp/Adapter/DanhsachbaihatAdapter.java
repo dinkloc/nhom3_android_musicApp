@@ -59,6 +59,15 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
             hinhbaihat = itemView.findViewById(R.id.imageViewhinhbaihat);
             tim = itemView.findViewById(R.id.imageViewtimdanhsachbaihat);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, PlayNhacActivity.class);
+                    intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
+
         }
     }
 }

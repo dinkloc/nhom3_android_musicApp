@@ -1,6 +1,7 @@
 package com.dinklokcode.musicapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dinklokcode.musicapp.Activity.PlayNhacActivity;
 import com.dinklokcode.musicapp.Model.BaiHat;
 import com.dinklokcode.musicapp.Model.BaiHatModel;
 import com.dinklokcode.musicapp.R;
@@ -30,6 +32,7 @@ import retrofit2.Response;
 public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder>{
     Context context;
     ArrayList<BaiHat> baiHatArraylist;
+    ArrayList<BaiHatModel> mangbaihat;
     String currentbh = "";
     String username = "";
     public BaiHatAdapter(Context context, ArrayList<BaiHat> baiHatArraylist) {
@@ -126,6 +129,7 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
             txtTenCasi = itemView.findViewById(R.id.txtCasiBaihai);
             imgBaihat = itemView.findViewById(R.id.imgBaihat);
             imgThich = itemView.findViewById(R.id.imgthich);
+
         }
     }
 }

@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class BaiHatModel implements Parcelable {
     @SerializedName("idBaiHat")
     @Expose
-    private int idBaiHat;
+    private String idBaiHat;
     @SerializedName("TenBaiHat")
     @Expose
     private String TenBaiHat;
@@ -23,7 +23,7 @@ public class BaiHatModel implements Parcelable {
     @Expose
     private String LinkBaiHat;
 
-    public BaiHatModel(int idBaiHat, String tenBaiHat, String hinhBaiHat, String tenCaSi, String linkBaiHat) {
+    public BaiHatModel(String idBaiHat, String tenBaiHat, String hinhBaiHat, String tenCaSi, String linkBaiHat) {
         this.idBaiHat = idBaiHat;
         this.TenBaiHat = tenBaiHat;
         this.HinhBaiHat = hinhBaiHat;
@@ -33,7 +33,7 @@ public class BaiHatModel implements Parcelable {
 
 
     protected BaiHatModel(Parcel in) {
-        idBaiHat = in.readInt();
+        idBaiHat = in.readString();
         TenBaiHat = in.readString();
         HinhBaiHat = in.readString();
         CaSi = in.readString();
@@ -52,11 +52,11 @@ public class BaiHatModel implements Parcelable {
         }
     };
 
-    public int getIdBaiHat() {
+    public String getIdBaiHat() {
         return idBaiHat;
     }
 
-    public void setIdBaiHat(int idBaiHat) {
+    public void setIdBaiHat(String idBaiHat) {
         this.idBaiHat = idBaiHat;
     }
 
@@ -101,7 +101,7 @@ public class BaiHatModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(idBaiHat);
+        parcel.writeString(idBaiHat);
         parcel.writeString(TenBaiHat);
         parcel.writeString(HinhBaiHat);
         parcel.writeString(CaSi);
