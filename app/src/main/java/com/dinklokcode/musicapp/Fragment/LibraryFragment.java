@@ -18,9 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dinklokcode.musicapp.Activity.LibPListActivity;
-import com.dinklokcode.musicapp.Activity.MainActivity;
-import com.dinklokcode.musicapp.Activity.SignUpActivity;
 import com.dinklokcode.musicapp.Adapter.BaiHatAdapter;
 import com.dinklokcode.musicapp.Adapter.PlaylistAdapter;
 import com.dinklokcode.musicapp.Model.BaiHat;
@@ -55,24 +52,9 @@ public class LibraryFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_library,container,false);
         txtCanhan = view.findViewById(R.id.txtcanhan);
         PlaylistCaNhan = view.findViewById(R.id.playlistcanhan);
-        txtTaoPlaylist = view.findViewById(R.id.taoplaylist);
         DsNhacYeuThich = view.findViewById(R.id.dsbaihatdathich);
-        txtCanhan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent t = new Intent(getActivity(), SignUpActivity.class);
-                startActivity(t);
-            }
-        });
         GetDataDSBaihat();
         GetDataPlaylist();
-        txtTaoPlaylist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent t = new Intent(getActivity(),LibPListActivity.class);
-                startActivity(t);
-            }
-        });
         return view;
     }
 
@@ -83,9 +65,17 @@ public class LibraryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 ArrayList<BaiHat> mangbh = (ArrayList<BaiHat>) response.body();
+<<<<<<< Updated upstream
+                Log.d("BBB",mangbh.get(0).getTenBaiHat());
+                baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh);
+                LinearLayoutManager ln = new LinearLayoutManager(getActivity());
+                ln.setOrientation(LinearLayoutManager.VERTICAL);
+                DsNhacYeuThich.setLayoutManager(ln);
+                DsNhacYeuThich.setAdapter(baiHatAdapter);
+=======
                 Log.d("BBB", String.valueOf(mangbh.size()));
                 if(mangbh.size()>0){
-                    baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh);
+                    baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh,"username","username");
                     LinearLayoutManager ln = new LinearLayoutManager(getActivity());
                     ln.setOrientation(LinearLayoutManager.VERTICAL);
                     DsNhacYeuThich.setLayoutManager(ln);
@@ -94,6 +84,7 @@ public class LibraryFragment extends Fragment {
                         DsNhacYeuThich.setAdapter(baiHatAdapter);
                     }
                 }
+>>>>>>> Stashed changes
             }
 
             @Override
@@ -110,15 +101,11 @@ public class LibraryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<PlaylistModel>> call, Response<List<PlaylistModel>> response) {
                 ArrayList<PlaylistModel> mangplaylist = (ArrayList<PlaylistModel>) response.body();
-                if(mangplaylist.size()>0){
-                    PlaylistAdapter = new PlaylistAdapter(getActivity(), mangplaylist);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                    linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                    PlaylistCaNhan.setLayoutManager(linearLayoutManager);
-                    if(PlaylistAdapter.sỉze()>0){
-                        PlaylistCaNhan.setAdapter(PlaylistAdapter);
-                    }
-                }
+                PlaylistAdapter = new PlaylistAdapter(getActivity(), mangplaylist);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                PlaylistCaNhan.setLayoutManager(linearLayoutManager);
+                PlaylistCaNhan.setAdapter(PlaylistAdapter);
             }
 
             @Override

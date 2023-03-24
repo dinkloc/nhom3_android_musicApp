@@ -3,6 +3,8 @@ package com.dinklokcode.musicapp.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -100,12 +102,11 @@ public class BaiHatModel implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(idBaiHat);
-        parcel.writeString(TenBaiHat);
-        parcel.writeString(HinhBaiHat);
-        parcel.writeString(CaSi);
-        parcel.writeString(LinkBaiHat);
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(idBaiHat);
+        dest.writeString(TenBaiHat);
+        dest.writeString(HinhBaiHat);
+        dest.writeString(CaSi);
+        dest.writeString(LinkBaiHat);
     }
-
 }

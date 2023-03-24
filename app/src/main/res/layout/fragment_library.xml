@@ -17,7 +17,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_user" />
+            android:src="@drawable/ic_user"></ImageView>
 
         <TextView
             android:id="@+id/txtcanhan"
@@ -28,7 +28,7 @@
             android:layout_toRightOf="@id/imgcanhan"
             android:text="Đăng nhập"
             android:textColor="#FF5F116C"
-            android:textSize="20dp" />
+            android:textSize="20dp"></TextView>
 
     </RelativeLayout>
 
@@ -40,8 +40,12 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_marginLeft="10dp"
+<<<<<<< Updated upstream
+        android:paddingTop="15dp">
+=======
         android:paddingTop="15dp"
-        android:paddingBottom="15dp">
+        android:paddingBottom="10dp">
+>>>>>>> Stashed changes
         </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playlistcanhan"
@@ -50,23 +54,24 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp">
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/create"
+            android:id="@+id/imgadd"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="7dp"></ImageView>
         <TextView
-            android:id="@+id/taoplaylist"
-            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/imgadd"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/create"
-            android:paddingLeft="7dp"
-            android:paddingRight="10dp"
             android:text="Tạo playlist"
-            android:drawablePadding="10dp"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
             android:textColor="#fff"
-            android:textSize="23sp" />
+            android:layout_marginTop="7dp"></TextView>
     </RelativeLayout>
     <TextView
         android:layout_width="wrap_content"
@@ -76,7 +81,7 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_marginLeft="10dp"
-        android:paddingTop="10dp">
+        android:paddingTop="15dp">
     </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dsbaihatdathich"
