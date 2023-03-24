@@ -53,7 +53,7 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
     Quangcao quangcao;
     ImageView btnThemnhac;
     SwipeRefreshLayout swipeRefreshLayout;
-    PlaylistModel playlistModel;
+    PlaylistModel playlistModel,playlistCanhan;
     CollapsingToolbarLayout collapsingToolbarLayout;
     private int id;
 
@@ -71,19 +71,50 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
         if (playlistModel != null && !playlistModel.getTen().equals("")) {
             setValueInView(playlistModel.getTen(), playlistModel.getHinhPlaylist());
             getDataPlayList(playlistModel.getIdPlaylist());
+        }
+        if( playlistCanhan !=null && !playlistCanhan.getTen().equals("")){
+            setValueInView(playlistCanhan.getTen(),playlistCanhan.getHinhPlaylist());
+            getDataPlayListCanhan(playlistCanhan.getIdPlaylist());
+        }
+        event();
+    }
+
+    private void event() {
+        if(playlistCanhan!=null){
             btnThemnhac.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(DanhSachBaiHat_Activity.this,InsertBH_playlistActivity.class);
-                    String idplaylist = playlistModel.getIdPlaylist();
+                    String idplaylist = playlistCanhan.getIdPlaylist();
                     Bundle d = new Bundle();
                     d.putString("id",idplaylist);
                     intent.putExtra("playlist", d);
                     startActivity(intent);
-                    getDataPlayList(playlistModel.getIdPlaylist());
                 }
             });
         }
+        else{
+            btnThemnhac.setOnClickListener(null);
+        }
+    }
+
+    private void getDataPlayListCanhan(String idPlaylist) {
+        DataService db = APIService.getService();
+        Call<List<BaiHatModel>> cb = db.GetBSBaiHat_Playlistcanhan(idPlaylist);
+        cb.enqueue(new Callback<List<BaiHatModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                mangBaiHat = (ArrayList<BaiHatModel>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhSachBaiHat_Activity.this,mangBaiHat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhSachBaiHat_Activity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getDataPlayList(String idPlayList) {
@@ -170,6 +201,9 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
             }
             if (intent.hasExtra("itemplaylist")) {
                 playlistModel = (PlaylistModel) intent.getSerializableExtra("itemplaylist");
+            }
+            if(intent.hasExtra("playlistcanhan")){
+                playlistCanhan = (PlaylistModel) intent.getSerializableExtra("playlistcanhan");
             }
         }
     }

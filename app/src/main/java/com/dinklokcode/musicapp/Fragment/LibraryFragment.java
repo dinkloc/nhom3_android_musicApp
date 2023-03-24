@@ -141,7 +141,8 @@ public class LibraryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<PlaylistModel>> call, Response<List<PlaylistModel>> response) {
                 ArrayList<PlaylistModel> mangplaylist = (ArrayList<PlaylistModel>) response.body();
-                PlaylistAdapter = new PlaylistAdapter(getActivity(), mangplaylist);
+                PlaylistAdapter = new PlaylistAdapter(getActivity(), mangplaylist,username);
+                Log.d("ASize", String.valueOf(mangplaylist.size()));
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 PlaylistCaNhan.setLayoutManager(linearLayoutManager);

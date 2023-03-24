@@ -57,7 +57,7 @@ public class LibPListActivity extends AppCompatActivity {
             public void onResponse(Call<List<PlaylistModel>> call, Response<List<PlaylistModel>> response) {
                 mangplaylist = (ArrayList<PlaylistModel>) response.body();
                 if(mangplaylist.size()>0){
-                    PlaylistAdapter = new PlaylistAdapter(LibPListActivity.this, mangplaylist);
+                    PlaylistAdapter = new PlaylistAdapter(LibPListActivity.this, mangplaylist,username);
                     DSallPlaylist.setLayoutManager(new GridLayoutManager(LibPListActivity.this,2));
                     if(PlaylistAdapter.sỉze()>0){
                         DSallPlaylist.setAdapter(PlaylistAdapter);

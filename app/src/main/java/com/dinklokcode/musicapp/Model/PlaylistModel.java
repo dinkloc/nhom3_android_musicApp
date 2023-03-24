@@ -3,12 +3,14 @@ package com.dinklokcode.musicapp.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class PlaylistModel implements Serializable {
+public class PlaylistModel implements Serializable{
     @SerializedName("idPlayList")
     @Expose
     private String idPlaylist;
@@ -20,6 +22,11 @@ public class PlaylistModel implements Serializable {
     private String hinhPlaylist;
 
 
+    protected PlaylistModel(Parcel in) {
+        idPlaylist = in.readString();
+        ten = in.readString();
+        hinhPlaylist = in.readString();
+    }
 
     public String getIdPlaylist() {
         return idPlaylist;
