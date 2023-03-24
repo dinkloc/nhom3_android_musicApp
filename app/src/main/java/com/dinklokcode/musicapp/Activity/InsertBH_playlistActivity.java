@@ -108,7 +108,6 @@ public class InsertBH_playlistActivity extends AppCompatActivity {
                 Intent t = getIntent();
                 if(t!=null){
                     Bundle plist = t.getBundleExtra("playlist");
-                    Log.d("CCCC",plist.getString("id"));
                     arrayBH = new BaiHatAdapter(InsertBH_playlistActivity.this,mangbh,plist.getString("id"),"playlist");
                 }else{
                     arrayBH = new BaiHatAdapter(InsertBH_playlistActivity.this,mangbh);

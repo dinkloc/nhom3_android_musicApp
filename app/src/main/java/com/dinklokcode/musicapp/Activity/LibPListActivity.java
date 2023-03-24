@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,8 @@ public class LibPListActivity extends AppCompatActivity {
     EditText playlistname;
     PlaylistAdapter PlaylistAdapter;
     ArrayList<PlaylistModel> mangplaylist;
+    String username="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +51,7 @@ public class LibPListActivity extends AppCompatActivity {
 
     private void getData() {
         DataService db = new APIService().getService();
-        Call<List<PlaylistModel>> callback = db.GetDSPlayListCaNhan("username");
+        Call<List<PlaylistModel>> callback = db.GetDSPlayListCaNhan(username);
         callback.enqueue(new Callback<List<PlaylistModel>>() {
             @Override
             public void onResponse(Call<List<PlaylistModel>> call, Response<List<PlaylistModel>> response) {
@@ -80,7 +83,9 @@ public class LibPListActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        Intent intent = getIntent();
+        Bundle d = intent.getBundleExtra("user");
+        username = d.getString("username");
         imgAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +95,7 @@ public class LibPListActivity extends AppCompatActivity {
                 }
                 else {
                     DataService db = APIService.getService();
-                    Call<String> cback = db.InsertPlayList("username",tenplaylist.toString());
+                    Call<String> cback = db.InsertPlayList(username,tenplaylist.toString());
                     cback.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
