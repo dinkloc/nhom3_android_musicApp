@@ -15,6 +15,22 @@
         android:theme="@style/Theme.MusicApp"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.PlayNhacActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DanhSachBaiHat_Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity.InsertBH_playlistActivity"
             android:exported="false">
             <meta-data
@@ -23,13 +39,6 @@
         </activity>
         <activity
             android:name=".Activity.LibPListActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.DanhSachBaiHat_Activity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -48,7 +57,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
     </application>
 
 </manifest>

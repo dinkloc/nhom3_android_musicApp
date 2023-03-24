@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dinklokcode.musicapp.Adapter.SearchBaiHatAdapter;
 import com.dinklokcode.musicapp.Model.BaiHat;
+import com.dinklokcode.musicapp.Model.BaiHatModel;
 import com.dinklokcode.musicapp.R;
 import com.dinklokcode.musicapp.Service.APIService;
 import com.dinklokcode.musicapp.Service.DataService;
@@ -77,12 +78,10 @@ public class SearchFragment extends Fragment {
     }
     private void SearchTuKhoaBaiHat(String query){
         DataService dataservice = APIService.getService();
-        Call<List<BaiHat>> callback = dataservice.GetSearchBaiHat(query);
-        callback.enqueue(new Callback<List<BaiHat>>() {
+        Call<List<BaiHatModel>> callback = dataservice.GetSearchBaiHat(query);
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
             @Override
-            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
-
-                ArrayList<BaiHat> mangbaihat = (ArrayList<BaiHat>) response.body();
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {ArrayList<BaiHatModel> mangbaihat = (ArrayList<BaiHatModel>) response.body();
                 if (mangbaihat.size()>0){
                     searchBaiHatAdapter = new SearchBaiHatAdapter(getActivity(),mangbaihat);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -97,7 +96,7 @@ public class SearchFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
 
             }
         });

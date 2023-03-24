@@ -12,7 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dinklokcode.musicapp.Activity.PlayNhacActivity;
 import com.dinklokcode.musicapp.Model.BaiHat;
+import com.dinklokcode.musicapp.Model.BaiHatModel;
 import com.dinklokcode.musicapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -20,9 +22,9 @@ import java.util.ArrayList;
 
 public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapter.ViewHolder>{
     Context context;
-    ArrayList<BaiHat> mangbaihat;
+    ArrayList<BaiHatModel> mangbaihat;
 
-    public SearchBaiHatAdapter(Context context, ArrayList<BaiHat> mangbaihat) {
+    public SearchBaiHatAdapter(Context context, ArrayList<BaiHatModel> mangbaihat) {
         this.context = context;
         this.mangbaihat = mangbaihat;
     }
@@ -36,9 +38,9 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        BaiHat baihat =mangbaihat.get(position);
+        BaiHatModel baihat =  mangbaihat.get(position);
         holder.txtTenBaiHat.setText(baihat.getTenBaiHat());
-        holder.txtCasi.setText(baihat.getCaSi());
+        holder.txtCasi.setText(baihat.getTenCaSi());
         Picasso.with(context).load(baihat.getHinhBaiHat()).into(holder.imgbaihat);
     }
 
@@ -56,14 +58,16 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
             txtTenBaiHat = itemView.findViewById(R.id.textviewsearchtenbaihat);
             txtCasi = itemView.findViewById(R.id.textviewsearchcasi);
             imgbaihat = itemView.findViewById(R.id.imageviewSearchbaihat);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context,PlaylistAdapter.class);
-                    intent.putExtra("cakhuc", (Parcelable) mangbaihat.get(getPosition()));
+                    Intent intent = new Intent(context, PlayNhacActivity.class);
+                    intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
                     context.startActivity(intent);
                 }
             });
+
         }
     }
 
