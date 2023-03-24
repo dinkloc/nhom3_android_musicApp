@@ -37,7 +37,7 @@ public interface DataService {
     Call<List<RadioModel>> GetRadioCurrent();
 
     @GET("allbaihat.php")
-    Call<List<BaiHat>> GetAllBaihat();
+    Call<List<BaiHatModel>> GetAllBaihat();
 
     @FormUrlEncoded
     @POST("danhsachbaihat.php")
@@ -53,32 +53,21 @@ public interface DataService {
 
     @FormUrlEncoded
     @POST("canhan_dsbaihatyt.php")
-    Call<List<BaiHat>> GetDSBaiHatYTCaNhan(@Field("username") String username);
+    Call<List<BaiHatModel>> GetDSBaiHatYTCaNhan(@Field("username") String username);
 
     @FormUrlEncoded
     @POST("updatebhyt.php")
-<<<<<<< Updated upstream
-    Call<String> UpdateBaiHatYT(@Field("username") String username,@Field("idbaihat") String idBaiHat,@Field("update") String update);
-=======
-    Call<String> UpdateBaiHatYT(@Field("username") String username,@Field("idbaihat") String idBaiHat);
+    Call<String> UpdateBaiHatYT(@Field("username") String username,@Field("idBaihat") String idBaihat);
 
     @FormUrlEncoded
     @POST("updateplaylist.php")
     Call<String> InsertPlayList(@Field("username") String username,@Field("nameplaylist") String nameplaylist);
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
-
-    @FormUrlEncoded
-    @POST("test.php")
-    Call<List<PlaylistModel>> TestInsertPlayList(@Field("username") String username,@Field("nameplaylist") String nameplaylist);
 
     @FormUrlEncoded
     @POST("searchbaihat.php")
-    Call<List<BaiHat>> GetSearchBaiHat(@Field("tukhoa") String tukhoa);
+    Call<List<BaiHatModel>> GetSearchBaiHat(@Field("tukhoa") String tukhoa);
 
     @FormUrlEncoded
     @POST("addbh_plist.php")
     Call<String> AddBaihatvaoPlaylist(@Field("idPlaylist") String idPlaylist,@Field("idBaihat") String idBaihat);
->>>>>>> Stashed changes
 }

@@ -71,9 +71,6 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
         if (playlistModel != null && !playlistModel.getTen().equals("")) {
             setValueInView(playlistModel.getTen(), playlistModel.getHinhPlaylist());
             getDataPlayList(playlistModel.getIdPlaylist());
-<<<<<<< Updated upstream
-=======
-            eventClick();
             btnThemnhac.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -86,7 +83,6 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
                     getDataPlayList(playlistModel.getIdPlaylist());
                 }
             });
->>>>>>> Stashed changes
         }
     }
 

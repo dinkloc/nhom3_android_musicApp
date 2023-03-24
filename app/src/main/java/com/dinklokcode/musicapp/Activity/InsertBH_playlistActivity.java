@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.dinklokcode.musicapp.Adapter.BaiHatAdapter;
 import com.dinklokcode.musicapp.Model.BaiHat;
+import com.dinklokcode.musicapp.Model.BaiHatModel;
 import com.dinklokcode.musicapp.Model.PlaylistModel;
 import com.dinklokcode.musicapp.R;
 import com.dinklokcode.musicapp.Service.APIService;
@@ -66,11 +67,11 @@ public class InsertBH_playlistActivity extends AppCompatActivity {
                 String search = txtSearch.getText().toString();
                 if(search!=""){
                     DataService db = APIService.getService();
-                    Call<List<BaiHat>> cb = db.GetSearchBaiHat(search);
-                    cb.enqueue(new Callback<List<BaiHat>>() {
+                    Call<List<BaiHatModel>> cb = db.GetSearchBaiHat(search);
+                    cb.enqueue(new Callback<List<BaiHatModel>>() {
                         @Override
-                        public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
-                            ArrayList<BaiHat> mangbh = (ArrayList<BaiHat>) response.body();
+                        public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                            ArrayList<BaiHatModel> mangbh = (ArrayList<BaiHatModel>) response.body();
                             arrayBH = new BaiHatAdapter(InsertBH_playlistActivity.this,mangbh);
                             DSBaiHat.setAdapter(arrayBH);
                             if(mangbh.size()>0){
@@ -83,7 +84,7 @@ public class InsertBH_playlistActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+                        public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
 
                         }
                     });
@@ -99,11 +100,11 @@ public class InsertBH_playlistActivity extends AppCompatActivity {
 
     private void getData() {
         DataService db = APIService.getService();
-        Call<List<BaiHat>> callback = db.GetAllBaihat();
-        callback.enqueue(new Callback<List<BaiHat>>() {
+        Call<List<BaiHatModel>> callback = db.GetAllBaihat();
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
             @Override
-            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
-                ArrayList<BaiHat> mangbh = (ArrayList<BaiHat>) response.body();
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                ArrayList<BaiHatModel> mangbh = (ArrayList<BaiHatModel>) response.body();
                 Intent t = getIntent();
                 if(t!=null){
                     Bundle plist = t.getBundleExtra("playlist");
@@ -116,15 +117,15 @@ public class InsertBH_playlistActivity extends AppCompatActivity {
                     LinearLayoutManager ln = new LinearLayoutManager(InsertBH_playlistActivity.this);
                     ln.setOrientation(LinearLayoutManager.VERTICAL);
                     DSBaiHat.setLayoutManager(ln);
-                    if(arrayBH.size()>0){
+                    if(arrayBH.getItemCount()>0){
                         DSBaiHat.setAdapter(arrayBH);
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
-                Log.d("AAAAAA",t.toString());
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
+
             }
         });
     }

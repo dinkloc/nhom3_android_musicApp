@@ -9,7 +9,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class BaiHatModel implements Parcelable {
-    @SerializedName("idBaiHat")
+    @SerializedName("idBaiHhat")
     @Expose
     private String idBaiHat;
     @SerializedName("TenBaiHat")

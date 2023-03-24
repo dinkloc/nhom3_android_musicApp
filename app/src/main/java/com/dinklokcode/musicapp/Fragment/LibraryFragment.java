@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dinklokcode.musicapp.Activity.LibPListActivity;
 import com.dinklokcode.musicapp.Adapter.BaiHatAdapter;
 import com.dinklokcode.musicapp.Adapter.PlaylistAdapter;
 import com.dinklokcode.musicapp.Model.BaiHat;
@@ -55,40 +56,37 @@ public class LibraryFragment extends Fragment {
         DsNhacYeuThich = view.findViewById(R.id.dsbaihatdathich);
         GetDataDSBaihat();
         GetDataPlaylist();
+        txtTaoPlaylist = view.findViewById(R.id.taoplaylist);
+        txtTaoPlaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LibPListActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
     private void GetDataDSBaihat() {
         DataService db = APIService.getService();
-        Call<List<BaiHat>> callback = db.GetDSBaiHatYTCaNhan("username");
-        callback.enqueue(new Callback<List<BaiHat>>() {
+        Call<List<BaiHatModel>> callback = db.GetDSBaiHatYTCaNhan("username");
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
             @Override
-            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
-                ArrayList<BaiHat> mangbh = (ArrayList<BaiHat>) response.body();
-<<<<<<< Updated upstream
-                Log.d("BBB",mangbh.get(0).getTenBaiHat());
-                baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh);
-                LinearLayoutManager ln = new LinearLayoutManager(getActivity());
-                ln.setOrientation(LinearLayoutManager.VERTICAL);
-                DsNhacYeuThich.setLayoutManager(ln);
-                DsNhacYeuThich.setAdapter(baiHatAdapter);
-=======
-                Log.d("BBB", String.valueOf(mangbh.size()));
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                ArrayList<BaiHatModel> mangbh = (ArrayList<BaiHatModel>) response.body();
                 if(mangbh.size()>0){
                     baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh,"username","username");
                     LinearLayoutManager ln = new LinearLayoutManager(getActivity());
                     ln.setOrientation(LinearLayoutManager.VERTICAL);
                     DsNhacYeuThich.setLayoutManager(ln);
-                    Log.d("CCC", String.valueOf(baiHatAdapter.size()));
-                    if(baiHatAdapter.size()>0){
+                    if(baiHatAdapter.getItemCount()>0){
                         DsNhacYeuThich.setAdapter(baiHatAdapter);
                     }
                 }
->>>>>>> Stashed changes
             }
 
             @Override
-            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
 
             }
         });
