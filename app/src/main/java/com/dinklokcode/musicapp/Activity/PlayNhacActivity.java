@@ -67,6 +67,13 @@ public class PlayNhacActivity extends AppCompatActivity {
                 mangbaihat = baihatArrayList;
             }
         }
+
+        if (mangbaihat.size() > 0) {
+            getSupportActionBar().setTitle(mangbaihat.get(0).getTenBaiHat());
+            new PlayMp3().execute(mangbaihat.get(0).getLinkBaiHat());
+            imgPlay.setImageResource(R.drawable.iconlove);
+        }
+
     }
 
     private void init() {
@@ -96,11 +103,6 @@ public class PlayNhacActivity extends AppCompatActivity {
         adapternhac.AddFragment(fragment_play_danh_sach_cac_bai_hat);
         viewPagerPlayNhac.setAdapter(adapternhac);
 //        fragment_dia_nhac = (Fragment_Dia_Nhac) adapternhac.getItem(1);
-        if (mangbaihat.size() > 0) {
-            getSupportActionBar().setTitle(mangbaihat.get(0).getTenBaiHat());
-            new PlayMp3().execute(mangbaihat.get(0).getLinkBaiHat());
-            imgPlay.setImageResource(R.drawable.iconlove);
-        }
     }
     class PlayMp3 extends AsyncTask<String, Void, String> {
 
