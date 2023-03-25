@@ -26,6 +26,7 @@ import com.dinklokcode.musicapp.Model.ChuDeModel;
 import com.dinklokcode.musicapp.Model.NgheSiModel;
 import com.dinklokcode.musicapp.Model.PlaylistModel;
 import com.dinklokcode.musicapp.Model.Quangcao;
+import com.dinklokcode.musicapp.Model.TheLoaiModel;
 import com.dinklokcode.musicapp.Model.ThinhHanhModel;
 import com.dinklokcode.musicapp.R;
 import com.dinklokcode.musicapp.Service.APIService;
@@ -60,6 +61,7 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
     ChuDeModel chuDeModel;
     NgheSiModel ngheSiModel;
     ThinhHanhModel thinhHanhModel;
+    TheLoaiModel theLoaiModel;
     CollapsingToolbarLayout collapsingToolbarLayout;
     private int id;
 
@@ -111,6 +113,31 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
             txtcollapsing.setText(thinhHanhModel.getTenThinhHanh());
         }
 
+        if (theLoaiModel!=null && !theLoaiModel.getTenTheLoai().equals("")) {
+            setValueInView(theLoaiModel.getTenTheLoai(), theLoaiModel.getHinhTheLoai());
+            getDataTheLoai(theLoaiModel.getIdTheLoai());
+            txtcollapsing.setText(theLoaiModel.getTenTheLoai());
+        }
+
+    }
+
+    private void getDataTheLoai(String idTheLoai) {
+        DataService dataService = APIService.getService();
+        Call<List<BaiHatModel>> callback = dataService.GetDanhSachBaiHatTheoTheLoai(idTheLoai);
+        callback.enqueue(new Callback<List<BaiHatModel>>() {
+            @Override
+            public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
+                mangBaiHat = (ArrayList<BaiHatModel>) response.body();
+                DanhsachbaihatAdapter danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhSachBaiHat_Activity.this, mangBaiHat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhSachBaiHat_Activity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHatModel>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getDataChuDe(String idChuDe) {
@@ -266,6 +293,10 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
             }
             if (intent.hasExtra("intentthinhhanh")) {
                 thinhHanhModel = (ThinhHanhModel) intent.getSerializableExtra("intentthinhhanh");
+            }
+
+            if (intent.hasExtra("intenttheloai")) {
+                theLoaiModel = (TheLoaiModel) intent.getSerializableExtra("intenttheloai");
             }
         }
     }

@@ -144,6 +144,16 @@
 
 
 
+
+        <fragment
+            android:name="com.dinklokcode.musicapp.Fragment.Fragment_TheLoai"
+            android:id="@+id/fragmentchude8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_theloai">
+        </fragment>
+
+
         <fragment
             android:name="com.dinklokcode.musicapp.Fragment.fragment_playlist"
             android:id="@+id/fragmentplaylist"
