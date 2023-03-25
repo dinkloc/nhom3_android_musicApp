@@ -7,6 +7,7 @@ import com.dinklokcode.musicapp.Model.NgheSiModel;
 import com.dinklokcode.musicapp.Model.PlaylistModel;
 import com.dinklokcode.musicapp.Model.Quangcao;
 import com.dinklokcode.musicapp.Model.RadioModel;
+import com.dinklokcode.musicapp.Model.TheLoaiModel;
 import com.dinklokcode.musicapp.Model.ThinhHanhModel;
 
 import java.util.List;
@@ -36,8 +37,14 @@ public interface DataService {
     @GET("radiocurrent.php")
     Call<List<RadioModel>> GetRadioCurrent();
 
+    @GET("getalltheloai.php")
+    Call<List<TheLoaiModel>> GetTheLoai();
+
+
     @GET("allbaihat.php")
     Call<List<BaiHatModel>> GetAllBaihat();
+
+
 
     @FormUrlEncoded
     @POST("danhsachbaihat.php")
@@ -50,6 +57,20 @@ public interface DataService {
     @FormUrlEncoded
     @POST("danhsachbaihat.php")
     Call<List<BaiHatModel>> GetBSBaiHat_Playlistcanhan(@Field("idPlayListCanhan") String idPlayListCanhan);
+    Call<List<BaiHatModel>> GetDanhSachBaiHatTheoTheLoai(@Field("idTheLoai") String idTheLoai);
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHatModel>> GetDanhSachBaiHatTheoThinhHanh(@Field("idThinhHanh") String idThinhHanh);
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHatModel>> GetDanhsachbaihatnghesi(@Field("idNgheSi") String idNgheSi);
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHatModel>> GetDanhSachBaiHatChuDe(@Field("idChuDe") String idTheLoai);
+
     @FormUrlEncoded
     @POST("canhan_playlist.php")
     Call<List<PlaylistModel>> GetDSPlayListCaNhan(@Field("username") String username);

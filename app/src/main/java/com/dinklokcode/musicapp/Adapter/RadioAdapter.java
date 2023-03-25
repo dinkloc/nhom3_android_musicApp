@@ -40,6 +40,7 @@ public class RadioAdapter extends RecyclerView.Adapter<RadioAdapter.ViewHolder> 
         holder.txtTenRadio.setText(radioModel.getNoiDungRadio());
         Picasso.with(context).load(radioModel.getHinhAnhRadio()).into(holder.imgRadio);
 
+
     }
 
     @Override

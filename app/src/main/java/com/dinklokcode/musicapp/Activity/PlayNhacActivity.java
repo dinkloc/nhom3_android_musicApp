@@ -51,7 +51,7 @@ public class PlayNhacActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         init();
         getDataFromIntent();
-//        eventClick();
+        eventClick();
     }
 
     private void getDataFromIntent() {
