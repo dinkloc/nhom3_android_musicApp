@@ -58,7 +58,6 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
     ImageView btnThemnhac;
     SwipeRefreshLayout swipeRefreshLayout;
     PlaylistModel playlistModel,playlistCanhan;
-    PlaylistModel playlistModel;
     ChuDeModel chuDeModel;
     NgheSiModel ngheSiModel;
     ThinhHanhModel thinhHanhModel;
@@ -320,17 +319,18 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
             if (intent.hasExtra("itemplaylist")) {
                 playlistModel = (PlaylistModel) intent.getSerializableExtra("itemplaylist");
             }
-            if(intent.hasExtra("playlistcanhan")){
+            if (intent.hasExtra("playlistcanhan")) {
                 playlistCanhan = (PlaylistModel) intent.getSerializableExtra("playlistcanhan");
-            if (intent.hasExtra("itemnghesi")) {
-                ngheSiModel = (NgheSiModel) intent.getSerializableExtra("itemnghesi");
-            }
-            if (intent.hasExtra("intentthinhhanh")) {
-                thinhHanhModel = (ThinhHanhModel) intent.getSerializableExtra("intentthinhhanh");
-            }
+                if (intent.hasExtra("itemnghesi")) {
+                    ngheSiModel = (NgheSiModel) intent.getSerializableExtra("itemnghesi");
+                }
+                if (intent.hasExtra("intentthinhhanh")) {
+                    thinhHanhModel = (ThinhHanhModel) intent.getSerializableExtra("intentthinhhanh");
+                }
 
-            if (intent.hasExtra("intenttheloai")) {
-                theLoaiModel = (TheLoaiModel) intent.getSerializableExtra("intenttheloai");
+                if (intent.hasExtra("intenttheloai")) {
+                    theLoaiModel = (TheLoaiModel) intent.getSerializableExtra("intenttheloai");
+                }
             }
         }
     }
