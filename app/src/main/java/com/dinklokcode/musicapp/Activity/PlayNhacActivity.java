@@ -80,7 +80,7 @@ public class PlayNhacActivity extends AppCompatActivity {
         if (mangbaihat.size() > 0) {
             getSupportActionBar().setTitle(mangbaihat.get(0).getTenBaiHat());
             new PlayMp3().execute(mangbaihat.get(0).getLinkBaiHat());
-            imgPlay.setImageResource(R.drawable.iconlove);
+            imgPlay.setImageResource(R.drawable.nutplay);
         }
 
     }
