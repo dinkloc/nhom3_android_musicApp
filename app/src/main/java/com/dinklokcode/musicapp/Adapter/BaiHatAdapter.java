@@ -1,17 +1,20 @@
 package com.dinklokcode.musicapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dinklokcode.musicapp.Activity.PlayNhacActivity;
 import com.dinklokcode.musicapp.Model.BaiHatModel;
 import com.dinklokcode.musicapp.R;
 import com.dinklokcode.musicapp.Service.APIService;
@@ -60,6 +63,14 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
         holder.txtCasi.setText(baiHat.getTenCaSi());
         holder.txtTenbh.setText(baiHat.getTenBaiHat());
         Picasso.with(context).load(baiHat.getHinhBaiHat()).into(holder.imgHinhbh);
+        holder.itemcakhuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PlayNhacActivity.class);
+                intent.putExtra("cakhuc", baiHat);
+                context.startActivity(intent);
+            }
+        });
         if(username==""){
             holder.imgThich.setImageResource(R.drawable.addbh);
             holder.imgThich.setOnClickListener(new View.OnClickListener() {
@@ -151,12 +162,14 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView txtTenbh,txtCasi;
         ImageView imgHinhbh,imgThich;
+        RelativeLayout itemcakhuc;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTenbh = itemView.findViewById(R.id.txtTenBaihat);
             txtCasi = itemView.findViewById(R.id.txtCasiBaihai);
             imgHinhbh = itemView.findViewById(R.id.imgBaihat);
             imgThich = itemView.findViewById(R.id.imgthich);
+            itemcakhuc = itemView.findViewById(R.id.itemcakhuc);
         }
     }
 }
