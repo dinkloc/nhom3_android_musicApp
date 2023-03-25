@@ -82,7 +82,6 @@ public class PlayNhacActivity extends AppCompatActivity {
             new PlayMp3().execute(mangbaihat.get(0).getLinkBaiHat());
             imgPlay.setImageResource(R.drawable.nutplay);
         }
-
     }
 
     private void init() {
@@ -139,40 +138,13 @@ public class PlayNhacActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             mediaPlayer.start();
+            UpdateTime();
             TimeSong();
         }
     }
 
 
     private void eventClick() {
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (adapternhac.getItem(1) != null) {
-//                    if (mangbaihat.size() > 0) {
-//                        fragment_dia_nhac.PlayNhac(mangbaihat.get(0).getHinhBaiHat());
-//                        handler.removeCallbacks(this);
-//                    } else {
-//                        handler.postDelayed(this, 300);
-//                    }
-//                }
-//            }
-//        }, 500);
-//        imgPlay.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (mediaPlayer.isPlaying()) {
-//                    mediaPlayer.pause();
-//                    imgPlay.setImageResource(R.drawable.iconlove);
-//                } else {
-//                    mediaPlayer.start();
-//                    imgPlay.setImageResource(R.drawable.iconnext);
-//                }
-//            }
-//        });
-
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
