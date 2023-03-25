@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class NgheSiModel implements Serializable {
-    @SerializedName("IdNgheSi")
+    @SerializedName("idNgheSi")
     @Expose
     private String idNgheSi;
     @SerializedName("TenNgheSi")

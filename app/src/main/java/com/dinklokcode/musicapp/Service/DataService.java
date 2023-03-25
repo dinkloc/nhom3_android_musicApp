@@ -36,8 +36,11 @@ public interface DataService {
     @GET("radiocurrent.php")
     Call<List<RadioModel>> GetRadioCurrent();
 
+
     @GET("allbaihat.php")
     Call<List<BaiHatModel>> GetAllBaihat();
+
+
 
     @FormUrlEncoded
     @POST("danhsachbaihat.php")
@@ -46,6 +49,18 @@ public interface DataService {
     @FormUrlEncoded
     @POST("danhsachbaihat.php")
     Call<List<BaiHatModel>> GetDanhSachBaiHatTheoPlayList(@Field("idPlayList") String idPlayList);
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHatModel>> GetDanhSachBaiHatTheoThinhHanh(@Field("idThinhHanh") String idThinhHanh);
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHatModel>> GetDanhsachbaihatnghesi(@Field("idNgheSi") String idNgheSi);
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHatModel>> GetDanhSachBaiHatChuDe(@Field("idChuDe") String idTheLoai);
 
     @FormUrlEncoded
     @POST("canhan_playlist.php")

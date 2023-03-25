@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dinklokcode.musicapp.Activity.DanhSachBaiHat_Activity;
 import com.dinklokcode.musicapp.Model.NgheSiModel;
 import com.dinklokcode.musicapp.R;
 import com.squareup.picasso.Picasso;
@@ -39,6 +40,17 @@ public class NgheSiAdapter extends RecyclerView.Adapter<NgheSiAdapter.ViewHolder
         NgheSiModel ngheSi = mangnghesi.get(position);
         holder.txttennghesi.setText(ngheSi.getTenNgheSi());
         Picasso.with(context).load(ngheSi.getHinhNgheSi()).into(holder.imgnghesi);
+        int a = position;
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DanhSachBaiHat_Activity.class);
+                intent.putExtra("itemnghesi", mangnghesi.get(a));
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override

@@ -11,8 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dinklokcode.musicapp.Activity.DanhSachBaiHat_Activity;
 import com.dinklokcode.musicapp.Model.ChuDeModel;
 
+import com.dinklokcode.musicapp.Model.PlaylistModel;
 import com.dinklokcode.musicapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +46,15 @@ public class ChuDeAdapter extends RecyclerView.Adapter<ChuDeAdapter.ViewHolder>{
         ChuDeModel chuDe = mangchude.get(position);
         holder.txttenchude.setText(chuDe.getTenChuDe());
         Picasso.with(context).load(chuDe.getHinhChuDe()).into(holder.imgchude);
+        int a = position;
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DanhSachBaiHat_Activity.class);
+                intent.putExtra("itemchude", mangchude.get(a));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
