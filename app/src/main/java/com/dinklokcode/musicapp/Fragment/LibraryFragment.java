@@ -1,7 +1,10 @@
 package com.dinklokcode.musicapp.Fragment;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +12,7 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dinklokcode.musicapp.Activity.InsertBH_playlistActivity;
 import com.dinklokcode.musicapp.Activity.LibPListActivity;
 import com.dinklokcode.musicapp.Activity.LoginActivity;
 import com.dinklokcode.musicapp.Adapter.BaiHatAdapter;
@@ -50,24 +55,40 @@ import retrofit2.Response;
 public class LibraryFragment extends Fragment {
     View view;
     TextView txtCanhan,txtTaoPlaylist;
+    ImageView imgViewmore;
     PlaylistAdapter PlaylistAdapter;
     BaiHatAdapter baiHatAdapter;
     RecyclerView PlaylistCaNhan, DsNhacYeuThich;
-    static String username ="username";
+    static String username ="";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_library,container,false);
         anhxa();
+        Bundle d = getArguments();
+        if(d!=null){
+            username = d.getString("username");
+        }
         if(username==""){
-            txtTaoPlaylist.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                }
-            });
+            txtTaoPlaylist.setOnClickListener(null);
+            imgViewmore.setVisibility(View.INVISIBLE);
             event();
         }
         else{
+            DataService db = APIService.getService();
+            Call<String> cb = db.Updateuser(username);
+            cb.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Log.d("CCC",response.body().toString());
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Log.d("CCC",t.toString());
+                }
+            });
+            imgViewmore.setVisibility(View.VISIBLE);
             txtCanhan.setText(username);
             init();
         }
@@ -76,6 +97,7 @@ public class LibraryFragment extends Fragment {
     }
 
     private void anhxa() {
+        imgViewmore = view.findViewById(R.id.imgViewmore);
         txtCanhan = view.findViewById(R.id.txtcanhan);
         PlaylistCaNhan = view.findViewById(R.id.playlistcanhan);
         DsNhacYeuThich = view.findViewById(R.id.dsbaihatdathich);
@@ -85,6 +107,7 @@ public class LibraryFragment extends Fragment {
     private void init() {
         GetDataDSBaihat();
         GetDataPlaylist();
+        imgViewmore.setVisibility(View.VISIBLE);
         txtTaoPlaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +115,17 @@ public class LibraryFragment extends Fragment {
                 Bundle d = new Bundle();
                 d.putString("username",username);
                 intent.putExtra("user",d);
-                startActivity(intent);
+                mGetResultLauncher.launch(intent);
+            }
+        });
+        imgViewmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), InsertBH_playlistActivity.class);
+                Bundle d = new Bundle();
+                d.putString("username",username);
+                intent.putExtra("user",d);
+                mGetResultLauncher.launch(intent);
             }
         });
         txtCanhan.setOnClickListener(null);
@@ -115,7 +148,6 @@ public class LibraryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
                 ArrayList<BaiHatModel> mangbh = (ArrayList<BaiHatModel>) response.body();
-                Log.d("CCC",username);
                 if(mangbh.size()>0){
                     baiHatAdapter = new BaiHatAdapter(getActivity(),mangbh,username,"username");
                     LinearLayoutManager ln = new LinearLayoutManager(getActivity());
@@ -163,6 +195,12 @@ public class LibraryFragment extends Fragment {
             txtCanhan.setText(rs);
             username = rs;
             init();
+        }
+        if(result.getResultCode()==RESULT_CANCELED){
+            GetDataPlaylist();
+        }
+        if(result.getResultCode()==150){
+            GetDataDSBaihat();
         }
     });
 }

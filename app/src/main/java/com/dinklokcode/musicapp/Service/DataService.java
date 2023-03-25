@@ -97,4 +97,12 @@ public interface DataService {
     @FormUrlEncoded
     @POST("addbh_plist.php")
     Call<String> AddBaihatvaoPlaylist(@Field("idPlaylist") String idPlaylist,@Field("idBaihat") String idBaihat);
+
+    @FormUrlEncoded
+    @POST("checkyt.php")
+    Call<String> CheckYT(@Field("idBaihat") String idBaihat,@Field("username") String username);
+
+    @FormUrlEncoded
+    @POST("updateuser.php")
+    Call<String> Updateuser(@Field("username") String username);
 }

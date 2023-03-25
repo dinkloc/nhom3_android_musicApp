@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText username, password;
     Button btnlogin,btnsignin;
     DBHelper DB;
+    int kt=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,11 @@ public class LoginActivity extends AppCompatActivity {
         btnlogin = (Button) findViewById(R.id.btnsignin1);
         DB = new DBHelper(this);
 
+        Intent t = getIntent();
+        if(t!=null && t.hasExtra("kt")){
+            Bundle d = t.getBundleExtra("kt");
+            kt = d.getInt("kt");
+        }
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,12 +48,22 @@ public class LoginActivity extends AppCompatActivity {
                     Boolean checkuserpass = DB.checkusernamepassword(user, pass);
                     if(checkuserpass==true){
                         Toast.makeText(LoginActivity.this, "Sign in successfull", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this,LibraryFragment.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("username", user);
-                        intent.putExtra("acc",bundle);
-                        setResult(RESULT_OK,intent);
-                        finish();
+                        if(kt==0){
+                            Intent intent = new Intent(LoginActivity.this,LibraryFragment.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("username", user);
+                            intent.putExtra("acc",bundle);
+                            setResult(RESULT_OK,intent);
+                            finish();
+                        }
+                        else{
+                            Log.d("CCC","cos");
+                            Intent t = new Intent(LoginActivity.this,MainActivity.class);
+                            Bundle d = new Bundle();
+                            d.putString("username", user);
+                            t.putExtra("acc",d);
+                            startActivity(t);
+                        }
                     }else{
                         Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }

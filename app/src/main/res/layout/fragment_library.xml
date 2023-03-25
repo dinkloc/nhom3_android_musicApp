@@ -67,19 +67,34 @@
             android:textColor="#fff"
             android:textSize="23sp" />
     </RelativeLayout>
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DANH SÁCH BÀI HÁT YÊU THÍCH"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:paddingTop="10dp">
-    </TextView>
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DANH SÁCH BÀI HÁT YÊU THÍCH"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:id="@+id/txtDsbhyt"
+            android:layout_marginLeft="10dp"
+            android:paddingTop="10dp">
+        </TextView>
+
+        <ImageView
+            android:id="@+id/imgViewmore"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/txtDsbhyt"
+            android:src="@drawable/more"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="5dp"/>
+    </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dsbaihatdathich"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
     </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

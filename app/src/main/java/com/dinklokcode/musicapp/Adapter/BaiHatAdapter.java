@@ -30,9 +30,9 @@ import retrofit2.Response;
 public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder>{
     Context context;
     ArrayList<BaiHatModel> bhArray;
-    String currentbh = "";
     String username = "";
     String idplaylist = "";
+    String bhyt ="";
     public BaiHatAdapter(Context context, ArrayList<BaiHatModel> bhAdapder) {
         this.context = context;
         this.bhArray = bhAdapder;
@@ -44,8 +44,11 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
         if(key=="username"){
             this.username = value;
         }
-        else{
+        else if(key=="playlist"){
             this.idplaylist = value;
+        }
+        else{
+            this.bhyt = value;
         }
     }
 
@@ -71,7 +74,7 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
                 context.startActivity(intent);
             }
         });
-        if(username==""){
+        if(idplaylist!=""){
             holder.imgThich.setImageResource(R.drawable.addbh);
             holder.imgThich.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -100,23 +103,43 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
                 }
             });
         }
-        else {
+        else{
+            DataService db = APIService.getService();
+            Call<String> callb = db.CheckYT(baiHat.getIdBaiHat(),username);
+            callb.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if(response.body().equals("true")){
+                        Log.d("CCC","true");
+                        holder.imgThich.setImageResource(R.drawable.loved);
+                    }
+                    else{
+                        Log.d("CCC","false");
+                        holder.imgThich.setImageResource(R.drawable.love);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+
+                }
+            });
             holder.imgThich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     DataService db = APIService.getService();
-                    if(currentbh != baiHat.getIdBaiHat()){
-                        currentbh = baiHat.getIdBaiHat();
-                        holder.imgThich.setImageResource(R.drawable.love);
-                        Call<String> str = db.UpdateBaiHatYT("username",baiHat.getIdBaiHat());
+                        Call<String> str = db.UpdateBaiHatYT(username,baiHat.getIdBaiHat());
                         str.enqueue(new Callback<String>() {
                             @Override
                             public void onResponse(Call<String> call, Response<String> response) {
-                                if(response.body().equals("OK")){
-                                    bhArray.remove(baiHat);
+                                if(response.body().equals("Delete")){
+//                                    bhArray.remove(baiHat);
+                                    holder.imgThich.setImageResource(R.drawable.love);
                                     Toast.makeText(context,"Bỏ thích",Toast.LENGTH_SHORT);
                                 }
-                                else{
+                                else if(response.body().equals("Add")){
+//                                    bhArray.add(baiHat);
+                                    holder.imgThich.setImageResource(R.drawable.loved);
                                     Toast.makeText(context,"Lỗi",Toast.LENGTH_SHORT);
                                 }
                             }
@@ -126,29 +149,6 @@ public class BaiHatAdapter extends RecyclerView.Adapter<BaiHatAdapter.ViewHolder
 
                             }
                         });
-                    }
-                    else{
-                        holder.imgThich.setImageResource(R.drawable.loved);
-                        Call<String> str = db.UpdateBaiHatYT("username",baiHat.getIdBaiHat());
-                        str.enqueue(new Callback<String>() {
-                            @Override
-                            public void onResponse(Call<String> call, Response<String> response) {
-                                if(response.body().equals("OK")){
-                                    bhArray.add(baiHat);
-                                    Toast.makeText(context,"Thích",Toast.LENGTH_SHORT);
-                                }
-                                else{
-                                    Toast.makeText(context,"Lỗi",Toast.LENGTH_SHORT);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<String> call, Throwable t) {
-
-                            }
-                        });
-                        currentbh = "";
-                    }
                 }
             });
         }
