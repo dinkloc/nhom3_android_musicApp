@@ -53,7 +53,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,int position) {
-//        int a = position;
         PlaylistModel playlist = mangplaylist.get(position);
         holder.txttenplaylist.setText(playlist.getTen());
         Picasso.with(context).load(playlist.getHinhPlaylist()).into(holder.imgplaylist);
@@ -70,12 +69,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
                 context.startActivity(intent);
             }
         });
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
 
     }
 

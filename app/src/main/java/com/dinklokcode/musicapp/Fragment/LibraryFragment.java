@@ -53,7 +53,7 @@ public class LibraryFragment extends Fragment {
     PlaylistAdapter PlaylistAdapter;
     BaiHatAdapter baiHatAdapter;
     RecyclerView PlaylistCaNhan, DsNhacYeuThich;
-    static String username ="";
+    static String username ="username";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

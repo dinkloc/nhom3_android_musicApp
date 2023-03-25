@@ -76,22 +76,44 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
             setValueInView(quangcao.getTenBaiHat(), quangcao.getHinhBaiHat());
             getDataQuangCao(quangcao.getIdQuangCao());
             txtcollapsing.setText(quangcao.getNoidung());
-
         }
         if (playlistModel != null && !playlistModel.getTen().equals("")) {
             setValueInView(playlistModel.getTen(), playlistModel.getHinhPlaylist());
             getDataPlayList(playlistModel.getIdPlaylist());
+            txtcollapsing.setText(playlistModel.getTen());
         }
         if( playlistCanhan !=null && !playlistCanhan.getTen().equals("")){
             setValueInView(playlistCanhan.getTen(),playlistCanhan.getHinhPlaylist());
             getDataPlayListCanhan(playlistCanhan.getIdPlaylist());
+        }
+        if (ngheSiModel!=null && !ngheSiModel.getTenNgheSi().equals("")) {
+            setValueInView(ngheSiModel.getTenNgheSi(), ngheSiModel.getHinhNgheSi());
+            getDataNgheSi(ngheSiModel.getIdNgheSi());
+            txtcollapsing.setText(ngheSiModel.getTenNgheSi());
+        }
+
+        if (chuDeModel!=null && !chuDeModel.getTenChuDe().equals("")) {
+            setValueInView(chuDeModel.getTenChuDe(), chuDeModel.getHinhChuDe());
+            getDataChuDe(chuDeModel.getIdChuDe());
+            txtcollapsing.setText(chuDeModel.getTenChuDe());
+        }
+
+        if (thinhHanhModel!=null && !thinhHanhModel.getTenThinhHanh().equals("")) {
+            setValueInView(thinhHanhModel.getTenThinhHanh(), thinhHanhModel.getHinhThinhHanh());
+            getDataThinhHanh(thinhHanhModel.getIdThinhHanh());
+            txtcollapsing.setText(thinhHanhModel.getTenThinhHanh());
+        }
+
+        if (theLoaiModel!=null && !theLoaiModel.getTenTheLoai().equals("")) {
+            setValueInView(theLoaiModel.getTenTheLoai(), theLoaiModel.getHinhTheLoai());
+            getDataTheLoai(theLoaiModel.getIdTheLoai());
+            txtcollapsing.setText(theLoaiModel.getTenTheLoai());
         }
         event();
     }
 
     private void event() {
         if(playlistCanhan!=null){
-            txtcollapsing.setText(playlistModel.getTen());
             btnThemnhac.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -126,30 +148,6 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
 
             }
         });
-        if (ngheSiModel!=null && !ngheSiModel.getTenNgheSi().equals("")) {
-            setValueInView(ngheSiModel.getTenNgheSi(), ngheSiModel.getHinhNgheSi());
-            getDataNgheSi(ngheSiModel.getIdNgheSi());
-            txtcollapsing.setText(ngheSiModel.getTenNgheSi());
-        }
-
-        if (chuDeModel!=null && !chuDeModel.getTenChuDe().equals("")) {
-            setValueInView(chuDeModel.getTenChuDe(), chuDeModel.getHinhChuDe());
-            getDataChuDe(chuDeModel.getIdChuDe());
-            txtcollapsing.setText(chuDeModel.getTenChuDe());
-        }
-
-        if (thinhHanhModel!=null && !thinhHanhModel.getTenThinhHanh().equals("")) {
-            setValueInView(thinhHanhModel.getTenThinhHanh(), thinhHanhModel.getHinhThinhHanh());
-            getDataThinhHanh(thinhHanhModel.getIdThinhHanh());
-            txtcollapsing.setText(thinhHanhModel.getTenThinhHanh());
-        }
-
-        if (theLoaiModel!=null && !theLoaiModel.getTenTheLoai().equals("")) {
-            setValueInView(theLoaiModel.getTenTheLoai(), theLoaiModel.getHinhTheLoai());
-            getDataTheLoai(theLoaiModel.getIdTheLoai());
-            txtcollapsing.setText(theLoaiModel.getTenTheLoai());
-        }
-
     }
 
     private void getDataTheLoai(String idTheLoai) {
@@ -321,16 +319,15 @@ public class DanhSachBaiHat_Activity extends AppCompatActivity {
             }
             if (intent.hasExtra("playlistcanhan")) {
                 playlistCanhan = (PlaylistModel) intent.getSerializableExtra("playlistcanhan");
-                if (intent.hasExtra("itemnghesi")) {
-                    ngheSiModel = (NgheSiModel) intent.getSerializableExtra("itemnghesi");
-                }
-                if (intent.hasExtra("intentthinhhanh")) {
-                    thinhHanhModel = (ThinhHanhModel) intent.getSerializableExtra("intentthinhhanh");
-                }
-
-                if (intent.hasExtra("intenttheloai")) {
-                    theLoaiModel = (TheLoaiModel) intent.getSerializableExtra("intenttheloai");
-                }
+            }
+            if (intent.hasExtra("itemnghesi")) {
+                ngheSiModel = (NgheSiModel) intent.getSerializableExtra("itemnghesi");
+            }
+            if (intent.hasExtra("intentthinhhanh")) {
+                thinhHanhModel = (ThinhHanhModel) intent.getSerializableExtra("intentthinhhanh");
+            }
+            if (intent.hasExtra("intenttheloai")) {
+                theLoaiModel = (TheLoaiModel) intent.getSerializableExtra("intenttheloai");
             }
         }
     }
