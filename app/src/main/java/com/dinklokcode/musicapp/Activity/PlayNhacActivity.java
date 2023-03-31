@@ -362,11 +362,10 @@ public class PlayNhacActivity extends AppCompatActivity {
                 }
             }
         },300);
-        final Handler handler1 = new Handler();
 
+        //Chuyen bai
+        Handler handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
-
-
             @Override
             public void run() {
                 if(next == true) {
@@ -392,7 +391,6 @@ public class PlayNhacActivity extends AppCompatActivity {
                         }
                         new PlayMp3().execute(mangbaihat.get(position).getLinkBaiHat());
                         fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat());
-                        //fragment_loi_bai_hat.ShowLoi();
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
                     }
                     imgpre.setClickable(false);
