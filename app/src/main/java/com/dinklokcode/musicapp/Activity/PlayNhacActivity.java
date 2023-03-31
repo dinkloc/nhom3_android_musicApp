@@ -58,8 +58,9 @@ public class PlayNhacActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_nhac);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        init();
+
         getDataFromIntent();
+        init();
         eventClick();
     }
 
@@ -75,12 +76,6 @@ public class PlayNhacActivity extends AppCompatActivity {
                 ArrayList<BaiHatModel> baihatArrayList = intent.getParcelableArrayListExtra("cacbaihat");
                 mangbaihat = baihatArrayList;
             }
-        }
-
-        if (mangbaihat.size() > 0) {
-            getSupportActionBar().setTitle(mangbaihat.get(0).getTenBaiHat());
-            new PlayMp3().execute(mangbaihat.get(0).getLinkBaiHat());
-            imgPlay.setImageResource(R.drawable.nutplay);
         }
     }
 
@@ -110,15 +105,25 @@ public class PlayNhacActivity extends AppCompatActivity {
         adapternhac.AddFragment(fragment_dia_nhac);
         adapternhac.AddFragment(fragment_play_danh_sach_cac_bai_hat);
         viewPagerPlayNhac.setAdapter(adapternhac);
-//        fragment_dia_nhac = (Fragment_Dia_Nhac) adapternhac.getItem(1);
+
+        if (mangbaihat.size() > 0) {
+            getSupportActionBar().setTitle(mangbaihat.get(0).getTenBaiHat());
+            new PlayMp3().execute(mangbaihat.get(0).getLinkBaiHat());
+            imgPlay.setImageResource(R.drawable.nutplay);
+        }
     }
+
+    //Params, Progress, Result
     class PlayMp3 extends AsyncTask<String, Void, String> {
 
+        //thực thi trong quá trình tiến trình chạy nền
         @Override
         protected String doInBackground(String... strings) {
             return strings[0];
         }
 
+        //Hàm này được gọi khi doInBackground hàm thành công việc.
+        // Kết quả của doInBackground() sẽ được trả cho hàm này để hiển thị lên giao diện người dùng.
         @Override
         protected void onPostExecute(String baihat) {
             super.onPostExecute(baihat);
@@ -143,6 +148,11 @@ public class PlayNhacActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mediaPlayer.stop();
+    }
 
     private void eventClick() {
         Handler handler = new Handler();
@@ -165,10 +175,10 @@ public class PlayNhacActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(mediaPlayer.isPlaying()){
                     mediaPlayer.pause();
-                    imgPlay.setImageResource(R.drawable.nutplay);
+                    imgPlay.setImageResource(R.drawable.nutpause);
                 }else{
                     mediaPlayer.start();
-                    imgPlay.setImageResource(R.drawable.nutpause);
+                    imgPlay.setImageResource(R.drawable.nutplay);
                 }
             }
         });
@@ -235,7 +245,8 @@ public class PlayNhacActivity extends AppCompatActivity {
                     mediaPlayer.start();
                     imgPlay.setImageResource(R.drawable.nutpause);
                 }
-                checkmenu = true;
+
+                //checkmenu = true;
                 if (mangbaihat.size() > 0) {
                     if (mediaPlayer.isPlaying() || mediaPlayer != null) {
                         mediaPlayer.stop();
@@ -264,7 +275,6 @@ public class PlayNhacActivity extends AppCompatActivity {
                         }
                         new PlayMp3().execute(mangbaihat.get(position).getLinkBaiHat());
                         fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat());
-                        //fragment_loi_bai_hat.ShowLoi();
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
                         UpdateTime();
                     }
@@ -304,7 +314,6 @@ public class PlayNhacActivity extends AppCompatActivity {
                         }
                         new PlayMp3().execute(mangbaihat.get(position).getLinkBaiHat());
                         fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat());
-                        //fragment_loi_bai_hat.ShowLoi();
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
                         UpdateTime();
                     }
@@ -354,7 +363,10 @@ public class PlayNhacActivity extends AppCompatActivity {
             }
         },300);
         final Handler handler1 = new Handler();
+
         handler1.postDelayed(new Runnable() {
+
+
             @Override
             public void run() {
                 if(next == true) {

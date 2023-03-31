@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -30,21 +29,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPagerAdapter.addFragment(new HomeFragment(), "Home");
         viewPagerAdapter.addFragment(new SearchFragment(), "Search");
-        Intent t = getIntent();
-        if(t.hasExtra("acc") && t!=null){
-            Bundle bundle = t.getBundleExtra("acc");
-            String username = bundle.getString("username");
-            Log.d("CCC",username);
-
-            Bundle d = new Bundle();
-            d.putString("username",username);
-            LibraryFragment libraryFragment = new LibraryFragment();
-            libraryFragment.setArguments(d);
-
-            viewPagerAdapter.addFragment(libraryFragment, "Library");
-        }else{
-            viewPagerAdapter.addFragment(new LibraryFragment(),"Library");
-        }
+        viewPagerAdapter.addFragment(new LibraryFragment(), "Library");
         myViewPager.setAdapter(viewPagerAdapter);
         myTablayout.setupWithViewPager(myViewPager);
         myTablayout.getTabAt(0).setIcon(R.drawable.ic_home);

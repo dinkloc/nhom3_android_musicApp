@@ -53,8 +53,6 @@ public class InsertBH_playlistActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                setResult(150,intent);
                 finish();
             }
         });
@@ -108,15 +106,10 @@ public class InsertBH_playlistActivity extends AppCompatActivity {
             public void onResponse(Call<List<BaiHatModel>> call, Response<List<BaiHatModel>> response) {
                 ArrayList<BaiHatModel> mangbh = (ArrayList<BaiHatModel>) response.body();
                 Intent t = getIntent();
-                if(t.hasExtra("playlist")){
+                if(t!=null){
                     Bundle plist = t.getBundleExtra("playlist");
                     arrayBH = new BaiHatAdapter(InsertBH_playlistActivity.this,mangbh,plist.getString("id"),"playlist");
-                }
-                else if(t.hasExtra("user")){
-                    Bundle user = t.getBundleExtra("user");
-                    arrayBH = new BaiHatAdapter(InsertBH_playlistActivity.this,mangbh,user.getString("username"),"username");
-                }
-                else {
+                }else{
                     arrayBH = new BaiHatAdapter(InsertBH_playlistActivity.this,mangbh);
                 }
                 if(mangbh.size()>0){

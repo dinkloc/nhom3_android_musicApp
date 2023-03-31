@@ -44,7 +44,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:id="@+id/imgthich"
-        android:src="@drawable/love">
+        android:src="@drawable/loved">
     </ImageView>
 
 </RelativeLayout>

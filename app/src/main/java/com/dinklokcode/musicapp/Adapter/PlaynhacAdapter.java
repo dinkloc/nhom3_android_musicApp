@@ -26,6 +26,7 @@ public class PlaynhacAdapter extends RecyclerView.Adapter<PlaynhacAdapter.ViewHo
         this.mangbaihat = mangbaihat;
     }
 
+    //Gan layout vao item
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,6 +35,7 @@ public class PlaynhacAdapter extends RecyclerView.Adapter<PlaynhacAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    //gan du lieu
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         BaiHatModel baiHatModel = mangbaihat.get(position);
@@ -54,7 +56,6 @@ public class PlaynhacAdapter extends RecyclerView.Adapter<PlaynhacAdapter.ViewHo
             txtCaSi = itemView.findViewById(R.id.textviewplaynhactencasi);
             txtIndex = itemView.findViewById(R.id.textviewplaynhacindex);
             txtTenBaiHat = itemView.findViewById(R.id.textviewplaynhactenbaihat);
-
         }
     }
 }

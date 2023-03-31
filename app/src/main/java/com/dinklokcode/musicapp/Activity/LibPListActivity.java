@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dinklokcode.musicapp.Adapter.PlaylistAdapter;
-import com.dinklokcode.musicapp.Fragment.LibraryFragment;
 import com.dinklokcode.musicapp.Model.PlaylistModel;
 import com.dinklokcode.musicapp.R;
 import com.dinklokcode.musicapp.Service.APIService;
@@ -81,8 +80,6 @@ public class LibPListActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                setResult(RESULT_CANCELED,intent);
                 finish();
             }
         });
@@ -121,7 +118,6 @@ public class LibPListActivity extends AppCompatActivity {
             }
         });
     }
-
     private void anhxa() {
         coordinatorLayout = findViewById(R.id.coordinatorlayout);
         collapsingToolbarLayout = findViewById(R.id.collapstoolbar_plist);
